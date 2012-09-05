@@ -1,0 +1,11 @@
+efunctions_indent
+
+echo -n " "
+tput setf 2
+tput bold
+echo -n "*"
+
+tput setf 7
+tput sgr0
+echo -n " "
+echo "$1"
