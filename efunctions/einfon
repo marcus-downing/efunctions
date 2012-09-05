@@ -7,4 +7,4 @@ echo -n "*"
 
 tput setf 7
 tput sgr0
-echo " $1"
+echo -n " $1"

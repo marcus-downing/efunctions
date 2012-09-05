@@ -1,7 +1,7 @@
 efunctions_indent
 
 echo -n " "
-tput setf 2
+tput setf 4
 tput bold
 echo -n "*"
 

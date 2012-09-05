@@ -1,10 +1,10 @@
 efunctions_indent
 
 echo -n " "
-tput setf 2
+tput setf 4
 tput bold
 echo -n "*"
 
 tput setf 7
 tput sgr0
-echo " $1"
+echo -n " $1"
