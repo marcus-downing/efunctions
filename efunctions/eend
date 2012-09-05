@@ -1,0 +1,26 @@
+P=$1
+
+tput ll
+tput cuu1
+COLS=$(tput cols)
+COLS=$(($COLS-6))
+tput cuf $COLS
+
+tput sgr0
+tput bold
+tput setf 1
+echo -n "[ "
+
+if [ "$P" -eq 0 ]
+then
+  tput setf 2
+  echo -n "ok"
+else
+  tput setf 4
+  echo -n "!!"
+fi
+tput setf 1
+echo " ]"
+
+tput sgr0
+tput ll
