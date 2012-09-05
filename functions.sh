@@ -1,3 +1,7 @@
+# Replicates Gentoo's functions.sh in a portable way
+# Obviously the borrow heavily from the original rc script
+# written by Roy Marples
+
 eindent()
 {
   EINFO_INDENT=$((${EINFO_INDENT:-0} + 2))

@@ -9,4 +9,7 @@ ebegin "Ged"
 eend 0
 ebegin "Mog"
 eend 1
+
+echo ""
+eval_ecolors
 eoutdent
