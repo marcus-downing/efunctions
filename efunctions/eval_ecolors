@@ -1,0 +1,13 @@
+GOOD=`tput sgr0; tput bold; tput setf 2`
+WARN=`tput sgr0; tput bold; tput setf 6`
+BAD=`tput sgr0; tput bold; tput setf 4`
+HILITE=`tput sgr0; tput bold; tput setf 3`
+BRACKET=`tput sgr0; tput bold; tput setf 1`
+NORMAL=`tput sgr0; tput setf 7`
+
+echo "GOOD='$GOOD'"
+echo "WARN='$WARN'"
+echo "BAD='$BAD'"
+echo "HILITE='$HILITE'"
+echo "BRACKET='$BRACKET'"
+echo "NORMAL='$NORMAL'"
