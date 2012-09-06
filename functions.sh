@@ -27,7 +27,7 @@ efunctions_indent()
 
 export -f 'efunctions_indent'
 
-HERE=$(readlink -f $0)
+HERE=$(readlink -f "${BASH_SOURCE[0]}")
 DIR=$(dirname "$HERE")
 FDIR="$DIR/efunctions"
 
