@@ -5,7 +5,7 @@ if [ "$P" -ne 0 ]
 then
   if [ "$MSG" != "" ]
   then
-    eerror "$MSG"
+    ewarn "$MSG"
   fi
 fi
 
