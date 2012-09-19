@@ -1,13 +1,13 @@
+eval $(eval_ecolors)
+
 efunctions_indent
 
-tput sgr0
-tput ll
+if [ ! -z "$GOOD" ] ; then
+	tput ll
+fi
 
-echo -n " "
-tput setf 2
-tput bold
-echo -n "*"
-
-tput setf 7
-tput sgr0
-echo " $1..."
+if [ $EBEGIN_NO_NEWLINE ] ; then
+	echo -n "$NORMAL $GOOD*$NORMAL $1$NORMAL... "
+else
+	echo "$NORMAL $GOOD*$NORMAL $1$NORMAL..."
+fi
