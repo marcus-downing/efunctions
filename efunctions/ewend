@@ -27,7 +27,7 @@ then
 else
   echo -n "${BAD} !!"
 fi
-echo " ${BRACKET}]${NORMAL}"
+echo " ${BRACKET}]${NORMAL} "
 
 if [ ! -z "$GOOD" ] ; then
 	tput sgr0
