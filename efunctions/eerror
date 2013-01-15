@@ -1,10 +1,7 @@
+eval $(eval_ecolors)
 efunctions_indent
 
-echo -n " "
-tput setf 4
-tput bold
-echo -n "*"
-
-tput setf 7
-tput sgr0
-echo " $1"
+if [ ! -z "$GOOD" ] ; then
+	tput ll
+fi
+echo "$NORMAL $BAD*$NORMAL $@"

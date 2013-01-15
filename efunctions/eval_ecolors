@@ -1,9 +1,29 @@
-GOOD=`tput sgr0; tput bold; tput setf 2`
-WARN=`tput sgr0; tput bold; tput setf 6`
-BAD=`tput sgr0; tput bold; tput setf 4`
-HILITE=`tput sgr0; tput bold; tput setf 3`
-BRACKET=`tput sgr0; tput bold; tput setf 1`
-NORMAL=`tput sgr0; tput setf 7`
+GOOD=''
+WARN=''
+BAD=''
+HILITE=''
+BRACKET=''
+
+# test if the shell can use colour and tput is available
+if [ ! -z "$TERM" ]
+then
+	if [ "$TERM" != "dumb" ]
+	then
+		if [ ! -z $(command -v tput) ]
+		then
+			tput colors &> /dev/null
+			if [ $? ]
+			then
+				GOOD=`tput sgr0; tput bold; tput setf 2`
+				WARN=`tput sgr0; tput bold; tput setf 6`
+				BAD=`tput sgr0; tput bold; tput setf 4`
+				HILITE=`tput sgr0; tput bold; tput setf 3`
+				BRACKET=`tput sgr0; tput bold; tput setf 1`
+				NORMAL=`tput sgr0; tput setf 7`
+			fi
+		fi
+		fi
+fi
 
 echo "GOOD='$GOOD'"
 echo "WARN='$WARN'"

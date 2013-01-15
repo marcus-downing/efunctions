@@ -1,5 +1,7 @@
 P=$1
-MSG="$2"
+[ "$2" != "" ] && MSG="$(echo $@ | cut -d ' ' -f 2-)" || MSG=""
+
+eval $(eval_ecolors)
 
 if [ "$P" -ne 0 ]
 then
@@ -9,29 +11,27 @@ then
   fi
 fi
 
-tput ll
-tput cuu1
-COLS=$(tput cols)
-COLS=$(($COLS-6))
-tput cuf $COLS
+if [ ! -z "$GOOD" ] ; then
+	COLS=$(tput cols)
+	COLS=$(($COLS - 7))
+	tput ll
+	tput cuu1
+	tput cuf $COLS
+fi
 
-tput sgr0
-tput bold
-tput setf 1
-echo -n "[ "
+echo -n "${BRACKET}["
 
 if [ "$P" -eq 0 ]
 then
-  tput setf 2
-  echo -n "ok"
+  echo -n "${GOOD} ok"
 else
-  tput setf 4
-  echo -n "!!"
+  echo -n "${BAD} !!"
 fi
-tput setf 1
-echo " ]"
+echo " ${BRACKET}]${NORMAL}"
 
-tput sgr0
-tput ll
+if [ ! -z "$GOOD" ] ; then
+	tput sgr0
+	tput ll
+fi
 
-return $P
+exit $P
