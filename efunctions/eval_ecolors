@@ -7,7 +7,7 @@ BRACKET=''
 # test if the shell can use colour and tput is available
 if [ ! -z "$TERM" ]
 then
-	if [ "$TERM" != "dumb" ]
+	if [ "$TERM" != "dumb" -a "$TERM" != "unknown" ]
 	then
 		if [ ! -z $(command -v tput) ]
 		then
