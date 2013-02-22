@@ -33,3 +33,6 @@ FDIR="$DIR/efunctions"
 
 export PATH="$PATH:$FDIR"
 
+if [ -z "$TERMINFO" ]; then
+  export TERMINFO=$(whereis terminfo | grep -o '^[^ ]* [^ ]*' | grep -o '[^ ]*$')
+fi
