@@ -4,8 +4,4 @@ efunctions_indent
 if [[ ! -z $(command -v tput) ]] ; then
 	tput ll
 fi
-<<<<<<< HEAD
 echo "$NORMAL $WARN*$NORMAL $@"
-=======
-echo "$NORMAL $WARN*$NORMAL $1"
->>>>>>> b35f73e902fc0a6977260a1d6e8b287ae3b1c82a
