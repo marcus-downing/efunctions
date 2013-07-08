@@ -4,4 +4,4 @@ efunctions_indent
 if [ ! -z "$GOOD" ] ; then
 	tput ll
 fi
-echo "$NORMAL $BAD*$NORMAL $1"
+echo "$NORMAL $BAD*$NORMAL $@"

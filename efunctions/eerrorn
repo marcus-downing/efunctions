@@ -4,4 +4,4 @@ efunctions_indent
 if [[ ! -z $(command -v tput) ]] ; then
 	tput ll
 fi
-echo -n "$NORMAL $BAD*$NORMAL $1"
+echo -n "$NORMAL $BAD*$NORMAL $@"

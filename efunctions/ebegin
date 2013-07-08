@@ -7,7 +7,7 @@ if [ ! -z "$GOOD" ] ; then
 fi
 
 if [ $EBEGIN_NO_NEWLINE ] ; then
-	echo -n "$NORMAL $GOOD*$NORMAL $1$NORMAL... "
+	echo -n "$NORMAL $GOOD*$NORMAL $@$NORMAL... "
 else
-	echo "$NORMAL $GOOD*$NORMAL $1$NORMAL..."
+	echo "$NORMAL $GOOD*$NORMAL $@$NORMAL..."
 fi
