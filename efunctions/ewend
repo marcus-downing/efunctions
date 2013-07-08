@@ -3,6 +3,8 @@ MSG="$(echo $@ | cut -d ' ' -f 2-)"
 
 eval $(eval_ecolors)
 
+eval $(eval_ecolors)
+
 if [ "$P" -ne 0 ]
 then
   if [ "$MSG" != "" ]
@@ -27,7 +29,7 @@ then
 else
   echo -n "${BAD} !!"
 fi
-echo " ${BRACKET}]${NORMAL}"
+echo " ${BRACKET}]${NORMAL} "
 
 if [ ! -z "$GOOD" ] ; then
 	tput sgr0
