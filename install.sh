@@ -1,8 +1,10 @@
+#!/bin/bash
+
 # http://stackoverflow.com/questions/1055671/how-can-i-get-the-behavior-of-gnus-readlink-f-on-a-mac
 function abspath {
 
-  if readlink -f $0 2>&1 | grep -q 'readlink: illegal option -- f'; then
-    TARGET_FILE=$1
+  if readlink -f "$1" 2>&1 | grep -q 'readlink: illegal option -- f'; then
+    TARGET_FILE="$1"
 
     cd `dirname $TARGET_FILE`
 
@@ -21,7 +23,7 @@ function abspath {
     PHYS_DIR=`pwd -P`
     RESULT=$PHYS_DIR/$TARGET_FILE
   else
-    RESULT=$(readlink -f $0)
+    RESULT=$(readlink -f "$1")
   fi
 
   echo $RESULT
