@@ -1,9 +1,12 @@
 source /etc/init.d/functions.sh
 einfo "Foo"
+einfo Spaces rock
 eindent
 ewarn "Bar"
+ewarn Spaces rock
 eoutdent
 eerror "Qux"
+eerror Spaces rock
 
 echo ""
 ebegin "Ged"
@@ -20,6 +23,8 @@ eindent
 ewend 1 "Provisos"
 eoutdent
 eoutdent
+ebegin Spaces rock
+eend 1 Yes indeedy!
 
 echo ""
 eval_ecolors
