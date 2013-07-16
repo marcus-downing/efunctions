@@ -25,9 +25,22 @@ efunctions_indent()
   done
 }
 
+abspath()
+{
+  case $OSTYPE in
+    darwin*)
+      readlink "$1"
+      ;;
+    *)
+      readlink -f "$1"
+      ;;
+  esac
+}
+
 export -f 'efunctions_indent'
 
-HERE=$(readlink -f "${BASH_SOURCE[0]}")
+#HERE=$(readlink -f "${BASH_SOURCE[0]}")
+HERE=$(abspath "${BASH_SOURCE[0]}")
 DIR=$(dirname "$HERE")
 FDIR="$DIR/efunctions"
 
