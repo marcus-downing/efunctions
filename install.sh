@@ -22,5 +22,9 @@ if [ -f /etc/init.d/functions.sh ]; then
   exit
 fi
 
+if [ ! -d /etc/init.d ]; then
+  sudo mkdir -p /etc/init.d
+fi
+
 "$DIR/efunctions/einfo" "Installing $SCRIPT into /etc/init.d"
 sudo ln -s "$SCRIPT" /etc/init.d/functions.sh
