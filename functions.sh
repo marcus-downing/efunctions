@@ -48,7 +48,7 @@ function abspath {
     PHYS_DIR=`pwd -P`
     RESULT=$PHYS_DIR/$TARGET_FILE
   else
-    RESULT=$(readlink -f $1)
+    RESULT=$(readlink -f "$1")
   fi
 
   echo $RESULT
