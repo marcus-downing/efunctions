@@ -28,27 +28,27 @@ efunctions_indent()
 # http://stackoverflow.com/questions/1055671/how-can-i-get-the-behavior-of-gnus-readlink-f-on-a-mac
 function abspath {
 
-  if readlink -f $0 2>&1 | grep -q 'readlink: illegal option -- f'; then
-    TARGET_FILE=$1
+  if readlink -f "$1" 2>&1 | grep -q 'readlink: illegal option -- f'; then
+    TARGET_FILE="$1"
 
-    cd `dirname $TARGET_FILE`
+    cd `dirname "$TARGET_FILE"`
 
-    TARGET_FILE=`basename $TARGET_FILE`
+    TARGET_FILE=`basename "$TARGET_FILE"`
 
     # Iterate down a (possible) chain of symlinks
     while [ -L "$TARGET_FILE" ]
     do
-      TARGET_FILE=`readlink $TARGET_FILE`
-      cd `dirname $TARGET_FILE`
-      TARGET_FILE=`basename $TARGET_FILE`
+      TARGET_FILE="`readlink "$TARGET_FILE"`"
+      cd "`dirname "$TARGET_FILE"`"
+      TARGET_FILE="`basename "$TARGET_FILE"`"
     done
 
     # Compute the canonicalized name by finding the physical path
     # for the directory we're in and appending the target file.
-    PHYS_DIR=`pwd -P`
-    RESULT=$PHYS_DIR/$TARGET_FILE
+    PHYS_DIR="`pwd -P`"
+    RESULT="$PHYS_DIR/$TARGET_FILE"
   else
-    RESULT=$(readlink -f "$1")
+    RESULT="$(readlink -f "$1")"
   fi
 
   echo $RESULT
