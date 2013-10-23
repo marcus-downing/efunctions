@@ -1,7 +1,5 @@
-P=$1
+P=${1:-0}
 [ "$2" != "" ] && MSG="$(echo $@ | cut -d ' ' -f 2-)" || MSG=""
-
-eval $(eval_ecolors)
 
 eval $(eval_ecolors)
 
