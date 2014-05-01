@@ -1,15 +1,15 @@
 eval $(eval_ecolors)
-PREFIX="$(efunctions_indent)"
+PREFIX="$(efunctions_indent) "
 
 case "$1" in
   info|einfo)
-    PREFIX="$PREFIX $GOOD*$NORMAL "
+    PREFIX="$PREFIX$GOOD*$NORMAL "
     ;;
   warn|ewarn)
-    PREFIX="$PREFIX $WARN*$NORMAL "
+    PREFIX="$PREFIX$WARN*$NORMAL "
     ;;
   error|eerror)
-    PREFIX="$PREFIX $BAD*$NORMAL "
+    PREFIX="$PREFIX$BAD*$NORMAL "
     ;;
 esac
 
