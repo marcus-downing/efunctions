@@ -2,13 +2,13 @@ eval $(eval_ecolors)
 PREFIX="$(efunctions_indent)"
 
 case "$1" in
-  info)
+  info|einfo)
     PREFIX="$PREFIX $GOOD*$NORMAL "
     ;;
-  warn)
+  warn|ewarn)
     PREFIX="$PREFIX $WARN*$NORMAL "
     ;;
-  error)
+  error|eerror)
     PREFIX="$PREFIX $BAD*$NORMAL "
     ;;
 esac
