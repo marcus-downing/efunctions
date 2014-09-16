@@ -54,6 +54,8 @@ function abspath {
   echo $RESULT
 }
 
+export -f 'eindent'
+export -f 'eoutdent'
 export -f 'efunctions_indent'
 
 #HERE=$(readlink -f "${BASH_SOURCE[0]}")
