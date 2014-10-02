@@ -1,4 +1,6 @@
-source /etc/init.d/functions.sh
+#!/bin/sh
+. /etc/init.d/functions.sh
+
 einfo "Foo"
 einfo Spaces rock
 eindent
@@ -27,4 +29,10 @@ ebegin Spaces rock
 eend 1 Yes indeedy!
 
 echo ""
-eval_ecolors
+. efunctions_ecolors
+einfo "Colour is ${GOOD}good"
+ewarn "Colour is ${WARN}alarming"
+eerror "Colour is ${BAD}bad"
+einfo "Colour is ${NORMAL}normal"
+ewarn "Brackets are ${BRACKET}bracketty"
+eerror "Text is ${HILITE}hilited"

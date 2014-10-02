@@ -1,0 +1,16 @@
+#!/bin/sh
+
+GOOD=`tput sgr0; tput bold; tput setf 2`
+WARN=`tput sgr0; tput bold; tput setf 6`
+BAD=`tput sgr0; tput bold; tput setf 4`
+HILITE=`tput sgr0; tput bold; tput setf 3`
+BRACKET=`tput sgr0; tput bold; tput setf 1`
+NORMAL=`tput sgr0; tput setf 7`
+
+export GOOD
+export WARN
+export BAD
+export HILITE
+export BRACKET
+export NORMAL
+

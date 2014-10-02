@@ -1,7 +1,8 @@
-eval $(eval_ecolors)
+#!/bin/sh
+. efunctions_ecolors
 efunctions_indent
 
-if [[ ! -z $(command -v tput) ]] ; then
+if [ ! -z $(command -v tput) ]; then
 	tput ll
 fi
 echo "$NORMAL $WARN*$NORMAL $@"

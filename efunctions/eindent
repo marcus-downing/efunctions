@@ -1,0 +1,5 @@
+#!/bin/sh
+EINFO_INDENT=$((${EINFO_INDENT:-0} + 2))
+if [ "$EINFO_INDENT" -gt 40 ] ; then EINFO_INDENT=40; fi
+export EINFO_INDENT
+

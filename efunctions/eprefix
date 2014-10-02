@@ -1,4 +1,5 @@
-eval $(eval_ecolors)
+#!/bin/sh
+. efunctions_ecolors
 PREFIX="$(efunctions_indent)"
 
 case "$1" in

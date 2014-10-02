@@ -1,7 +1,8 @@
-eval $(eval_ecolors)
+#!/bin/sh
+. efunctions_ecolors
 efunctions_indent
 
-if [[ ! -z "$GOOD" ]] ; then
+if [ ! -z "$GOOD" ]; then
 	tput ll
 fi
 echo "$NORMAL $GOOD*$NORMAL $@"
