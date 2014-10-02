@@ -4,16 +4,15 @@
 # written by Roy Marples
 
 eindent() {
-  . "$FDIR/eindent"
+  . "$EFUNCTIONS_DIR/eindent"
 }
 
 eoutdent() {
-  . "$FDIR/eoutdent"
+  . "$EFUNCTIONS_DIR/eoutdent"
 }
 
 # http://stackoverflow.com/questions/1055671/how-can-i-get-the-behavior-of-gnus-readlink-f-on-a-mac
 abspath() {
-
   if readlink -f "$1" 2>&1 | grep -q 'readlink: illegal option -- f'; then
     TARGET_FILE="$1"
 
@@ -42,9 +41,8 @@ abspath() {
 
 HERE="$(abspath "$0")"
 DIR="$(dirname "$HERE")"
-FDIR="$DIR/efunctions"
-
-export PATH="$PATH:$FDIR"
+export EFUNCTIONS_DIR="$DIR/efunctions"
+export PATH="$PATH:$EFUNCTIONS_DIR"
 
 if [ -z "$TERMINFO" ]; then
   export TERMINFO=$(whereis terminfo | grep -o '^[^ ]* [^ ]*' | grep -o '[^ ]*$')
