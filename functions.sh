@@ -39,7 +39,11 @@ abspath() {
   echo $RESULT
 }
 
-HERE="$(abspath "$0")"
+if [ -x "/etc/init.d/functions.sh" ]; then
+  HERE="$(abspath "/etc/init.d/functions.sh")"
+else
+  HERE="$(abspath "$0")"
+fi
 DIR="$(dirname "$HERE")"
 export EFUNCTIONS_DIR="$DIR/efunctions"
 export PATH="$PATH:$EFUNCTIONS_DIR"
