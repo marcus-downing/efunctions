@@ -48,6 +48,10 @@ DIR="$(dirname "$HERE")"
 export EFUNCTIONS_DIR="$DIR/efunctions"
 export PATH="$PATH:$EFUNCTIONS_DIR"
 
+if [ -n "$TERM" ] && [ "$TERM" = unknown ] ; then
+  export TERM=dumb
+fi
+
 if [ -z "$TERMINFO" ]; then
   export TERMINFO=$(whereis terminfo | grep -o '^[^ ]* [^ ]*' | grep -o '[^ ]*$')
 fi
