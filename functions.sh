@@ -1,4 +1,7 @@
 #!/bin/sh
+# Copyright (c) 2015 Marcus Downing <marcus.downing@gmail.com>
+# Released under the 2-clause BSD license.
+
 # Replicates Gentoo's functions.sh in a portable way
 # Obviously borrow heavily from the original rc script
 # written by Roy Marples

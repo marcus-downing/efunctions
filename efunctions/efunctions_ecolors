@@ -1,4 +1,6 @@
 #!/bin/sh
+# Copyright (c) 2015 Marcus Downing <marcus.downing@gmail.com>
+# Released under the 2-clause BSD license.
 
 GOOD=`tput sgr0; tput bold; tput setf 2`
 WARN=`tput sgr0; tput bold; tput setf 6`

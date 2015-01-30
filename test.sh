@@ -1,4 +1,7 @@
 #!/bin/sh
+# Copyright (c) 2015 Marcus Downing <marcus.downing@gmail.com>
+# Released under the 2-clause BSD license.
+
 . /etc/init.d/functions.sh
 
 einfo "Foo"

@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2015 Marcus Downing <marcus.downing@gmail.com>
+# Released under the 2-clause BSD license.
 
 # http://stackoverflow.com/questions/1055671/how-can-i-get-the-behavior-of-gnus-readlink-f-on-a-mac
 function abspath {
