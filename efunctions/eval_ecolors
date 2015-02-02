@@ -15,7 +15,7 @@ then
 	then
 		if [ ! -z $(command -v tput) ]
 		then
-			tput colors &> /dev/null
+			tput colors > /dev/null 2>&1
 			if [ $? ]
 			then
 				GOOD=`tput sgr0; tput bold; tput setf 2`
@@ -26,7 +26,7 @@ then
 				NORMAL=`tput sgr0; tput setf 7`
 			fi
 		fi
-		fi
+	fi
 fi
 
 echo "GOOD='$GOOD'"
