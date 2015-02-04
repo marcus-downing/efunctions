@@ -2,10 +2,10 @@
 # Copyright (c) 2015 Marcus Downing <marcus.downing@gmail.com>
 # Released under the 2-clause BSD license.
 
-eval $(eval_ecolors)
+. efunctions_ecolors
 efunctions_indent
 
-if [[ ! -z $(command -v tput) ]] ; then
+if [ ! -z "$(command -v tput)" ] ; then
 	tput ll
 fi
 echo -n "$NORMAL $GOOD*$NORMAL $@"
