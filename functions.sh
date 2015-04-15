@@ -59,4 +59,5 @@ if [ -z "$TERMINFO" ]; then
   export TERMINFO=$(whereis terminfo | grep -o '^[^ ]* [^ ]*' | grep -o '[^ ]*$')
 fi
 
-export EFUNCTIONS_ECHO="$(command -v echo)"
+export EFUNCTIONS_ECHO="$(which echo)"
+export EINFO_INDENT=0
