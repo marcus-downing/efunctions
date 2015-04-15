@@ -5,5 +5,5 @@
 EINFO_INDENT=${EINFO_INDENT:-0}
 for I in `seq 1 $EINFO_INDENT`
 do
-  echo -n " "
+  "$EFUNCTIONS_ECHO" -n " "
 done

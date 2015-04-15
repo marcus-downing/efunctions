@@ -9,4 +9,4 @@ if [ ! -z "$GOOD" ] ; then
 	tput ll
 fi
 
-echo -n "$NORMAL $GOOD*$NORMAL $@$NORMAL... "
+"$EFUNCTIONS_ECHO" -n "$NORMAL $GOOD*$NORMAL $@$NORMAL... "

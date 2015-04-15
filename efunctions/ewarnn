@@ -8,4 +8,4 @@ efunctions_indent
 if [ ! -z "$(command -v tput)" ]; then
 	tput ll
 fi
-echo -n "$NORMAL $WARN*$NORMAL $@"
+"$EFUNCTIONS_ECHO" -n "$NORMAL $WARN*$NORMAL $@"

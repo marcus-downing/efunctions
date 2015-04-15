@@ -23,15 +23,15 @@ if [ ! -z "$GOOD" ] ; then
 	tput cuf $COLS
 fi
 
-echo -n "${BRACKET}["
+"$EFUNCTIONS_ECHO" -n "${BRACKET}["
 
 if [ "$P" -eq 0 ]
 then
-  echo -n "${GOOD} ok"
+  "$EFUNCTIONS_ECHO" -n "${GOOD} ok"
 else
-  echo -n "${BAD} !!"
+  "$EFUNCTIONS_ECHO" -n "${BAD} !!"
 fi
-echo " ${BRACKET}]${NORMAL} "
+"$EFUNCTIONS_ECHO" " ${BRACKET}]${NORMAL} "
 
 if [ ! -z "$GOOD" ] ; then
 	tput sgr0
