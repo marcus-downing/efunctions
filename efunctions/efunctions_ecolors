@@ -2,12 +2,21 @@
 # Copyright (c) 2015 Marcus Downing <marcus.downing@gmail.com>
 # Released under the 2-clause BSD license.
 
-GOOD=`tput sgr0; tput bold; tput setf 2`
-WARN=`tput sgr0; tput bold; tput setf 6`
-BAD=`tput sgr0; tput bold; tput setf 4`
-HILITE=`tput sgr0; tput bold; tput setf 3`
-BRACKET=`tput sgr0; tput bold; tput setf 1`
-NORMAL=`tput sgr0; tput setf 7`
+if tput setf 1 >/dev/null 2>&1; then
+	GOOD=`tput sgr0; tput bold; tput setf 2`
+	WARN=`tput sgr0; tput bold; tput setf 6`
+	BAD=`tput sgr0; tput bold; tput setf 4`
+	HILITE=`tput sgr0; tput bold; tput setf 3`
+	BRACKET=`tput sgr0; tput bold; tput setf 1`
+	NORMAL=`tput sgr0; tput setf 7`
+else
+	GOOD="$(/bin/echo -e "\e[1;32m")"
+	WARN="$(/bin/echo -e "\e[1;33m")"
+	BAD="$(/bin/echo -e "\e[1;31m")"
+	HILITE="$(/bin/echo -e "\e[1;36m")"
+	BRACKET="$(/bin/echo -e "\e[1;34m")"
+	NORMAL="$(/bin/echo -e "\e[0m")"
+fi
 
 export GOOD
 export WARN
