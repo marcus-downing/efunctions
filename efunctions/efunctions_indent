@@ -3,7 +3,9 @@
 # Released under the 2-clause BSD license.
 
 EINFO_INDENT=${EINFO_INDENT:-0}
-for I in `seq 1 $EINFO_INDENT`
-do
-  "$EFUNCTIONS_ECHO" -n " "
-done
+if [ ! -z "$EINFO_INDENT" ]; then
+  for I in `seq 1 $EINFO_INDENT`
+  do
+    "$EFUNCTIONS_ECHO" -n " "
+  done
+fi

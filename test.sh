@@ -2,7 +2,8 @@
 # Copyright (c) 2015 Marcus Downing <marcus.downing@gmail.com>
 # Released under the 2-clause BSD license.
 
-. /etc/init.d/functions.sh
+# . /etc/init.d/functions.sh
+. "$(dirname "$0")/functions.sh"
 
 einfo "Foo"
 einfo Spaces rock
