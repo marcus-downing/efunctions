@@ -1,14 +1,14 @@
 efunctions
 ==========
 
-Port of Gentoo's functions.sh to other *nixes.
+Port of Gentoo's `functions.sh` to other *nixes.
 
 Gentoo provides a number of functions for providing feedback on scripts and services. This is a port of those functions to other linuxes such as Ubuntu, so that scripts continue to work.
 
 ## Getting started
 
 ### Installation
-Check out this repository to a safe place (we'd suggest `/opt/efunctions`, but it's up to you. Then run the installation script.
+Check out this repository to a safe place - we'd suggest `/opt/efunctions`, but it's up to you. Then run the installation script.
 
 ```sh
 git clone https://github.com/marcusatbang/efunctions.git /opt/efunctions
@@ -27,7 +27,7 @@ Use it in your own scripts with:
 . /etc/init.d/functions.sh
 ```
 
-Note that `bash` is quite forgiving with how source files are includes, while simpler shells like `dash` can be more restrictive.
+Note that `bash` is quite forgiving with how source files are included, while simpler shells like `dash` can be more restrictive.
 
 If you want to gain access to the colour code variables, use:
 
