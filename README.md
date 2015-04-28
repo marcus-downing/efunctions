@@ -13,7 +13,7 @@ Check out this repository to a safe place - we'd suggest `/opt/efunctions`, but 
 ```sh
 git clone https://github.com/marcusatbang/efunctions.git /opt/efunctions
 cd /opt/efunctions
-./install.sh
+sudo ./install.sh
 ```
 
 This will place a symlink in the traditional place used by Gentoo's `functions.sh`.
