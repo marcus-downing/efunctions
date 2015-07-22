@@ -3,7 +3,7 @@
 # Released under the 2-clause BSD license.
 
 P=${1:-0}
-[ "$2" != "" ] && MSG="$(echo $@ | cut -d ' ' -f 2-)" || MSG=""
+[ "$2" != "" ] && MSG="$("$EFUNCTIONS_ECHO" $@ | cut -d ' ' -f 2-)" || MSG=""
 
 . efunctions_ecolors
 
@@ -18,24 +18,24 @@ fi
 if [ ! -z "$GOOD" ] ; then
 	COLS=$(tput cols)
 	COLS=$(($COLS - 7))
-	tput ll
-	tput cuu1
-	tput cuf $COLS
+	tput ll 1>&2
+	tput cuu1 1>&2
+	tput cuf $COLS 1>&2
 fi
 
-"$EFUNCTIONS_ECHO" -n "${BRACKET}["
+"$EFUNCTIONS_ECHO" -n "${BRACKET}[" 1>&2
 
 if [ "$P" -eq 0 ]
 then
-  "$EFUNCTIONS_ECHO" -n "${GOOD} ok"
+  "$EFUNCTIONS_ECHO" -n "${GOOD} ok" 1>&2
 else
-  "$EFUNCTIONS_ECHO" -n "${BAD} !!"
+  "$EFUNCTIONS_ECHO" -n "${BAD} !!" 1>&2
 fi
-"$EFUNCTIONS_ECHO" " ${BRACKET}]${NORMAL} "
+"$EFUNCTIONS_ECHO" " ${BRACKET}]${NORMAL} " 1>&2
 
 if [ ! -z "$GOOD" ] ; then
-	tput sgr0
-	tput ll
+	tput sgr0 1>&2
+	tput ll 1>&2
 fi
 
 exit $P

@@ -6,6 +6,6 @@
 efunctions_indent
 
 if [ ! -z "$(command -v tput)" ]; then
-	tput ll
+	tput ll 1>&2
 fi
-"$EFUNCTIONS_ECHO" "$NORMAL $WARN*$NORMAL $@$NORMAL"
+"$EFUNCTIONS_ECHO" "$NORMAL $WARN*$NORMAL $@$NORMAL" 1>&2

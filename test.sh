@@ -32,7 +32,7 @@ eoutdent
 ebegin Spaces rock
 eend 1 Yes indeedy!
 
-echo ""
+echo "" 1>&2
 . efunctions_ecolors
 einfo "Colour is ${GOOD}good"
 ewarn "Colour is ${WARN}alarming"

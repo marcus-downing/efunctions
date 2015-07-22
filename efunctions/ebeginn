@@ -6,7 +6,7 @@
 efunctions_indent
 
 if [ ! -z "$GOOD" ] ; then
-	tput ll
+	tput ll 1>&2
 fi
 
-"$EFUNCTIONS_ECHO" -n "$NORMAL $GOOD*$NORMAL $@$NORMAL... "
+"$EFUNCTIONS_ECHO" -n "$NORMAL $GOOD*$NORMAL $@$NORMAL... " 1>&2

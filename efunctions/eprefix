@@ -20,5 +20,5 @@ case "$1" in
 esac
 
 while read LINE; do
-  echo "$LINE" | sed "s/^/$PREFIX/"
+  "$EFUNCTIONS_ECHO" "$LINE" | sed "s/^/$PREFIX/" 1>&2
 done

@@ -4,9 +4,9 @@
 
 . "$(dirname "$0")/efunctions_ecolors"
 
-echo "GOOD='$GOOD'"
-echo "WARN='$WARN'"
-echo "BAD='$BAD'"
-echo "HILITE='$HILITE'"
-echo "BRACKET='$BRACKET'"
-echo "NORMAL='$NORMAL'"
+"$EFUNCTIONS_ECHO" "GOOD='$GOOD'"
+"$EFUNCTIONS_ECHO" "WARN='$WARN'"
+"$EFUNCTIONS_ECHO" "BAD='$BAD'"
+"$EFUNCTIONS_ECHO" "HILITE='$HILITE'"
+"$EFUNCTIONS_ECHO" "BRACKET='$BRACKET'"
+"$EFUNCTIONS_ECHO" "NORMAL='$NORMAL'"

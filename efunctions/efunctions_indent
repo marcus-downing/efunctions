@@ -6,6 +6,6 @@ EINFO_INDENT=${EINFO_INDENT:-0}
 if [ "$EINFO_INDENT" -gt "0" ]; then
   for I in `seq 1 $EINFO_INDENT`
   do
-    "$EFUNCTIONS_ECHO" -n " "
+    "$EFUNCTIONS_ECHO" -n " " 1>&2
   done
 fi
