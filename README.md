@@ -65,9 +65,9 @@ eerror "Oh noes!"
 The same as above, but without the newline at the end of each.
 
 ```sh
-einfo "Stuff happens"
-ewarn "Dangerous stuff happens"
-eerror "Oh noes!"
+einfon "Stuff happens"
+ewarnn "Dangerous stuff happens"
+eerrorn "Oh noes!"
 ```
 
 ```
