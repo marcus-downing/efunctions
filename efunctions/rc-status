@@ -1,0 +1,85 @@
+#!/bin/sh
+# Copyright (c) 2016 Marcus Downing <marcus.downing@gmail.com>
+# Released under the 2-clause BSD license.
+
+. ../functions.sh
+. efunctions_ecolors
+
+command_exists() {
+	command -v "$1" >/dev/null 2>/dev/null
+}
+
+# cf
+map_put () {
+    alias "hash__${1}$2"="$3"
+}
+
+map_get() {
+    alias "hash__${1}$2" 2>/dev/null | awk -F"'" '{ print $2; }'
+}
+
+map_keys() {
+    alias | grep '^hash__'$1 | cut -d'=' -f1 | awk -F"$1" '{print $2; }'
+}
+
+
+# System V jobs
+if command_exists service; then
+	for service in $(service --status-all 2>&1 | cut -c 9-); do
+		map_put services "$service"
+		map_put is_sysv "$service" yes
+
+		if service "$service" status >/dev/null 2>&1; then
+			map_put running "$service" "yes"
+		else
+			map_put running "$service" "no"
+		fi
+	done
+fi
+
+# Upstart jobs
+if command_exists initctl; then
+	for service in `initctl list | cut -d ' ' -f 1`; do
+		map_put services "$service"
+		map_put is_upstart "$service" yes
+		map_put status "$service" "no"
+
+		if initctl status "$service" 2>&1 | grep "start/running" >/dev/null; then
+			map_put running "$service" "yes"
+		else
+			map_put running "$service" "no"
+		fi
+	done
+fi
+
+# TODO systemd?
+
+# Output
+bold=`tput bold`
+
+all_services="$(map_keys services | sort | uniq)"
+for service in $all_services; do
+	running="$(map_get running "$service")"
+
+	src=""
+	if [ "$(map_get is_upstart "$service")" = "yes" ]; then
+		src=" ${BRACKET}(upstart)"
+	else
+		if [ "$(map_get is_sysv "$service")" = "yes" ]; then
+			src=" ${BRACKET}(system V)"
+		fi
+	fi
+
+	if [ "yes" = "$running" ]; then
+		einfo "$bold$service$src"
+		eend 0
+	else
+		if [ "no" = "$running" ]; then
+			eerror "$service$src"
+			eend 1
+		else
+			ewarn "$service$src"
+			eend 1
+		fi
+	fi
+done
