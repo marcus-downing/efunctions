@@ -31,8 +31,8 @@ if command_exists service; then
 
 		if service "$service" status >/dev/null 2>&1; then
 			map_put running "$service" "yes"
-		else
-			map_put running "$service" "no"
+		# else
+			# map_put running "$service" "no"
 		fi
 	done
 fi
@@ -46,8 +46,13 @@ if command_exists initctl; then
 
 		if initctl status "$service" 2>&1 | grep "start/running" >/dev/null; then
 			map_put running "$service" "yes"
-		else
-			map_put running "$service" "no"
+
+			pid="$(initctl status "$service" | grep -o 'process [0-9]\+' | sed 's/^process //')"
+			if [ ! -z "$pid" ]; then
+				map_put pid "$service" "$pid"
+			fi
+		# else
+			# map_put running "$service" "no"
 		fi
 	done
 fi
@@ -65,21 +70,24 @@ for service in $all_services; do
 	src="${BRACKET}"
 	if [ "$(map_get is_upstart "$service")" = "yes" ]; then
 		src="$src  upstart"
+	else
+		src="$src         "
 	fi
 	if [ "$(map_get is_sysv "$service")" = "yes" ]; then
-		src="$src  system V"
+		src="$src  sysV"
+	else
+		src="$src      "
 	fi
 
+	pid="$NORMAL  $(printf "%6s" "$(map_get pid "$service")")"
+
 	if [ "yes" = "$running" ]; then
-		einfo "$bold$service_name$src"
-		eend 0
+		einfo "$bold$service_name$src$pid"
 	else
-		if [ "no" = "$running" ]; then
-			eerror "$service_name$src"
-			eend 1
+		if [ "no" = "$running" -o "" = "$running" ]; then
+			eerror "$service_name$src$pid"
 		else
-			ewarn "$service_name$src"
-			eend 1
+			ewarn "$service_name$src$pid"
 		fi
 	fi
 done
