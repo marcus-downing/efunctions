@@ -55,8 +55,26 @@ if command_exists initctl; then
 			# map_put running "$service" "no"
 		fi
 	done
-fi
 
+	IFS='
+'
+	for service in `initctl list | grep '(.*)'`; do
+		base="$(echo "$service" | cut -d ' ' -f 1)"
+		unit="$(echo "$service" | cut -d ' ' -f 2)"
+		unit="${unit#(}"
+		unit="${unit%)}"
+
+		map_put has_units "$base" yes
+		map_put service_units "$base" "$(map_get service_units "$base") $unit"
+
+		if echo "$service" | grep "start/running" >/dev/null; then
+			map_put running "${base}__${unit}" yes
+		fi
+		# einfo "sub service $base -> $unit"
+	done
+	unset IFS
+fi
+# echo "\n\n"
 # TODO systemd?
 
 # Output
@@ -81,13 +99,29 @@ for service in $all_services; do
 
 	pid="$NORMAL  $(printf "%6s" "$(map_get pid "$service")")"
 
-	if [ "yes" = "$running" ]; then
-		einfo "$bold$service_name$src$pid"
+	if [ "$(map_get has_units "$service")" ]; then
+		einfo "$service_name"
+		eindent
+
+		for unit in `map_get service_units "$service" | tr ' ' '\n' | sort`; do
+			unit_running="$(map_get running "${service}__${unit}")"
+			if [ "yes" = "$unit_running" ]; then
+				einfo "$unit"
+			else
+				eerror "$unit"
+			fi
+		done
+
+		eoutdent
 	else
-		if [ "no" = "$running" -o "" = "$running" ]; then
-			eerror "$service_name$src$pid"
+		if [ "yes" = "$running" ]; then
+			einfo "$bold$service_name$src$pid"
 		else
-			ewarn "$service_name$src$pid"
+			if [ "no" = "$running" -o "" = "$running" ]; then
+				eerror "$service_name$src$pid"
+			else
+				ewarn "$service_name$src$pid"
+			fi
 		fi
 	fi
 done
