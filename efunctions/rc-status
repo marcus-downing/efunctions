@@ -61,24 +61,24 @@ all_services="$(map_keys services | sort | uniq)"
 for service in $all_services; do
 	running="$(map_get running "$service")"
 
-	src=""
+	service_name="$(printf "%-40s" "$service")"
+	src="${BRACKET}"
 	if [ "$(map_get is_upstart "$service")" = "yes" ]; then
-		src=" ${BRACKET}(upstart)"
-	else
-		if [ "$(map_get is_sysv "$service")" = "yes" ]; then
-			src=" ${BRACKET}(system V)"
-		fi
+		src="$src  upstart"
+	fi
+	if [ "$(map_get is_sysv "$service")" = "yes" ]; then
+		src="$src  system V"
 	fi
 
 	if [ "yes" = "$running" ]; then
-		einfo "$bold$service$src"
+		einfo "$bold$service_name$src"
 		eend 0
 	else
 		if [ "no" = "$running" ]; then
-			eerror "$service$src"
+			eerror "$service_name$src"
 			eend 1
 		else
-			ewarn "$service$src"
+			ewarn "$service_name$src"
 			eend 1
 		fi
 	fi
