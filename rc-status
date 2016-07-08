@@ -2,7 +2,7 @@
 # Copyright (c) 2016 Marcus Downing <marcus.downing@gmail.com>
 # Released under the 2-clause BSD license.
 
-. ../functions.sh
+. "$(dirname "$0")"/functions.sh
 . efunctions_ecolors
 
 command_exists() {
