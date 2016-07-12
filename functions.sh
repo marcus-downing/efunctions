@@ -60,4 +60,7 @@ if [ -z "$TERMINFO" ]; then
 fi
 
 export EFUNCTIONS_ECHO="$(which echo)"
-export EINFO_INDENT=0
+if [ "yes" != "$EFUNCTIONS_LOADED" ]; then
+	export EINFO_INDENT=0
+fi
+export EFUNCTIONS_LOADED="yes"
