@@ -85,7 +85,10 @@ for service in $all_services; do
 	running="$(map_get running "$service")"
 
 	service_name="$(printf "%-40s" "$service")"
-	src="${BRACKET}"
+	src=""
+	if [ "yes" = "$running" ]; then
+		src="${BRACKET}"
+	fi
 	if [ "$(map_get is_upstart "$service")" = "yes" ]; then
 		src="$src  upstart"
 	else
@@ -98,6 +101,9 @@ for service in $all_services; do
 	fi
 
 	pid="$NORMAL  $(printf "%6s" "$(map_get pid "$service")")"
+	# if [ -z "$pid" ]; then
+
+	# fi
 
 	if [ "$(map_get has_units "$service")" ]; then
 		einfo "$service_name"
