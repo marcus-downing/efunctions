@@ -2,6 +2,10 @@
 # Copyright (c) 2015 Marcus Downing <marcus.downing@gmail.com>
 # Released under the 2-clause BSD license.
 
+if [ -z "$TERM" ]; then
+	TERM="dumb"
+fi
+
 if tput setf 1 >/dev/null 2>&1; then
 	#echo "Standard colours" 1>&2
 	GOOD=`tput sgr0; tput bold; tput setf 2`
@@ -20,13 +24,23 @@ else
 		BRACKET=`tput sgr0; tput bold; tput setaf 4`
 		NORMAL=`tput sgr0`
 	else
-		#echo "Fallback colours" 1>&2
-		GOOD="$(/bin/echo -e "\e[1;32m")"
-		WARN="$(/bin/echo -e "\e[1;33m")"
-		BAD="$(/bin/echo -e "\e[1;31m")"
-		HILITE="$(/bin/echo -e "\e[1;36m")"
-		BRACKET="$(/bin/echo -e "\e[1;34m")"
-		NORMAL="$(/bin/echo -e "\e[0m")"
+		if tty -s; then
+			#echo "Fallback colours" 1>&2
+			GOOD="$(/bin/echo -e "\e[1;32m")"
+			WARN="$(/bin/echo -e "\e[1;33m")"
+			BAD="$(/bin/echo -e "\e[1;31m")"
+			HILITE="$(/bin/echo -e "\e[1;36m")"
+			BRACKET="$(/bin/echo -e "\e[1;34m")"
+			NORMAL="$(/bin/echo -e "\e[0m")"
+		else
+			#echo "No colours" 1>&2
+			GOOD=''
+			WARN=''
+			BAD=''
+			HILITE=''
+			BRACKET=''
+			NORMAL=''
+		fi
 	fi
 fi
 
