@@ -1,10 +1,16 @@
 #!/bin/sh
+### BEGIN INIT INFO
+# Provides:          functions.sh
+# Required-Start:
+# Required-Stop:
+# Short-Description: Replicates Gentoo's functions.sh
+# Description:       Replicates Gentoo's functions.sh in a portable way.
+#                    Obviously borrow heavily from the original rc script
+#                    written by Roy Marples
+### END INIT INFO
+
 # Copyright (c) 2015 Marcus Downing <marcus.downing@gmail.com>
 # Released under the 2-clause BSD license.
-
-# Replicates Gentoo's functions.sh in a portable way
-# Obviously borrow heavily from the original rc script
-# written by Roy Marples
 
 eindent() {
   . "$EFUNCTIONS_DIR/eindent"
