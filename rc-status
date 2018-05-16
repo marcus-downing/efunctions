@@ -1,0 +1,133 @@
+#!/bin/sh
+# Copyright (c) 2016 Marcus Downing <marcus.downing@gmail.com>
+# Released under the 2-clause BSD license.
+
+. "$(dirname "$0")"/functions.sh
+. efunctions_ecolors
+
+command_exists() {
+	command -v "$1" >/dev/null 2>/dev/null
+}
+
+# cf
+map_put () {
+    alias "hash__${1}$2"="$3"
+}
+
+map_get() {
+    alias "hash__${1}$2" 2>/dev/null | awk -F"'" '{ print $2; }'
+}
+
+map_keys() {
+    alias | grep '^hash__'$1 | cut -d'=' -f1 | awk -F"$1" '{print $2; }'
+}
+
+
+# System V jobs
+if command_exists service; then
+	for service in $(service --status-all 2>&1 | cut -c 9-); do
+		map_put services "$service"
+		map_put is_sysv "$service" yes
+
+		if service "$service" status >/dev/null 2>&1; then
+			map_put running "$service" "yes"
+		# else
+			# map_put running "$service" "no"
+		fi
+	done
+fi
+
+# Upstart jobs
+if command_exists initctl; then
+	for service in `initctl list | cut -d ' ' -f 1`; do
+		map_put services "$service"
+		map_put is_upstart "$service" yes
+		map_put status "$service" "no"
+
+		if initctl status "$service" 2>&1 | grep "start/running" >/dev/null; then
+			map_put running "$service" "yes"
+
+			pid="$(initctl status "$service" | grep -o 'process [0-9]\+' | sed 's/^process //')"
+			if [ ! -z "$pid" ]; then
+				map_put pid "$service" "$pid"
+			fi
+		# else
+			# map_put running "$service" "no"
+		fi
+	done
+
+	IFS='
+'
+	for service in `initctl list | grep '(.*)'`; do
+		base="$(echo "$service" | cut -d ' ' -f 1)"
+		unit="$(echo "$service" | cut -d ' ' -f 2)"
+		unit="${unit#(}"
+		unit="${unit%)}"
+
+		map_put has_units "$base" yes
+		map_put service_units "$base" "$(map_get service_units "$base") $unit"
+
+		if echo "$service" | grep "start/running" >/dev/null; then
+			map_put running "${base}__${unit}" yes
+		fi
+		# einfo "sub service $base -> $unit"
+	done
+	unset IFS
+fi
+# echo "\n\n"
+# TODO systemd?
+
+# Output
+bold=`tput bold`
+
+all_services="$(map_keys services | sort | uniq)"
+for service in $all_services; do
+	running="$(map_get running "$service")"
+
+	service_name="$(printf "%-40s" "$service")"
+	src=""
+	if [ "yes" = "$running" ]; then
+		src="${BRACKET}"
+	fi
+	if [ "$(map_get is_upstart "$service")" = "yes" ]; then
+		src="$src  upstart"
+	else
+		src="$src         "
+	fi
+	if [ "$(map_get is_sysv "$service")" = "yes" ]; then
+		src="$src  sysV"
+	else
+		src="$src      "
+	fi
+
+	pid="$NORMAL  $(printf "%6s" "$(map_get pid "$service")")"
+	# if [ -z "$pid" ]; then
+
+	# fi
+
+	if [ "$(map_get has_units "$service")" ]; then
+		einfo "$service_name"
+		eindent
+
+		for unit in `map_get service_units "$service" | tr ' ' '\n' | sort`; do
+			unit_running="$(map_get running "${service}__${unit}")"
+			if [ "yes" = "$unit_running" ]; then
+				einfo "$unit"
+			else
+				eerror "$unit"
+			fi
+		done
+
+		eoutdent
+	else
+		if [ "yes" = "$running" ]; then
+			einfo "$bold$service_name$src$pid"
+		else
+			if [ "no" = "$running" -o "" = "$running" ]; then
+				eerror "$service_name$src$pid"
+			else
+				ewarn "$service_name$src$pid"
+			fi
+		fi
+	fi
+done
